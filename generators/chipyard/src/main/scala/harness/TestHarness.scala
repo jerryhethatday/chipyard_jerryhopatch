@@ -1,4 +1,4 @@
-package chipyard
+package chipyard.harness
 
 import chisel3._
 
@@ -11,6 +11,7 @@ import freechips.rocketchip.prci.{ClockBundle, ClockBundleParameters, ClockSinkP
 import chipyard.harness.{ApplyHarnessBinders, HarnessBinders}
 import chipyard.iobinders.HasIOBinders
 import chipyard.clocking.{SimplePllConfiguration, ClockDividerN}
+import chipyard.{ChipTop}
 
 // -------------------------------
 // Chipyard Test Harness
@@ -18,7 +19,7 @@ import chipyard.clocking.{SimplePllConfiguration, ClockDividerN}
 
 case object BuildTop extends Field[Parameters => LazyModule]((p: Parameters) => new ChipTop()(p))
 case object DefaultClockFrequencyKey extends Field[Double](100.0) // MHz
-case object HarnessClockInstantiatorKey extends Field[() => HarnessClockInstantiator](() => new DividerOnlyHarnessClockInstantiator)
+case object HarnessClockInstantiatorKey extends Field[() => HarnessClockInstantiator]()
 
 trait HasHarnessSignalReferences {
   implicit val p: Parameters
